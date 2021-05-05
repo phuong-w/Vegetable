@@ -1,0 +1,38 @@
+/* ================== page show products ========== */
+
+#product-home {
+    margin-top: 44px;
+}
+
+#content {
+    margin-top: 30px;
+}
+
+#menu-product-home {
+    display: block;
+    margin-top: -3px;
+}
+
+.products {
+    display: block;
+    width: 100%;
+}
+
+#menu-product-home>a>li {
+    margin: 20px 0px;
+    padding: 10px 22px 10px 22px;
+}
+
+.navigation {
+    text-align: center;
+}
+
+.pagination {
+    position: absolute;
+    left: 42.5%;
+    bottom: -14%;
+}
+
+.pagination>li>a {
+    color: #80bb01;
+}

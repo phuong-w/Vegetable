@@ -1,0 +1,248 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 15px;
+    color: #000204;
+}
+
+a {
+    text-decoration: none;
+    color: #126e0f;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #126e0f;
+}
+
+li {
+    list-style: none;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+input {
+    outline: none;
+}
+
+.block {
+    padding: 0px;
+}
+
+.row {
+    display: block;
+    margin-right: -30px;
+    margin-left: -30px;
+}
+
+
+/* ------------ fix ----------- */
+
+.col-md-3 {
+    width: 21%;
+}
+
+.col-md-9 {
+    width: 79%;
+}
+
+.header {
+    height: 40px;
+    background-color: grey;
+}
+
+.logo-text {
+    line-height: 40px;
+    margin: 0px;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.logo-text span {
+    font-size: 18px;
+    color: #126e0f;
+}
+
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+    line-height: 40px;
+}
+
+.sayhi {
+    position: relative;
+}
+
+.sayhi:hover .dropdown-menu {
+    display: block;
+    transition: all 4s;
+}
+
+.dropdown-menu {
+    top: 93%;
+    z-index: 1000;
+    text-align: center;
+    left: 43px;
+    box-shadow: 0 0 10px rgb(100 100 100 / 53%);
+    padding: 0;
+}
+
+.dropdown-menu>li:hover {
+    background-color: #f5f5f5;
+}
+
+.form-input_search {
+    margin-top: 30px;
+    background-color: #fff;
+    width: 100%;
+    position: relative;
+    height: 35 px;
+    text-align: center;
+    border-bottom: 1px solid #222;
+}
+
+.input_search {
+    width: 80%;
+    border: none;
+    z-index: -1;
+    line-height: 30px;
+}
+
+.button_search {
+    position: absolute;
+    height: 30px;
+    border: none;
+    width: 30px;
+    top: 0px;
+    right: 0px;
+    background-color: #fff;
+}
+
+.button_search>i {
+    color: yellowgreen;
+}
+
+.clear {
+    clear: both;
+}
+
+.content {
+    display: flex;
+}
+
+.col-left {
+    width: 21%;
+}
+
+.col-right {
+    width: 79%;
+}
+
+.menu_control>ul>a>li,
+.logout>ul>a>li {
+    font-size: 16px;
+    padding: 10px 0px;
+    color: #126e0f;
+    padding-left: 25px;
+    cursor: pointer;
+}
+
+.active {
+    background-color: rgb(114, 165, 11);
+}
+
+.menu_control>ul>a>li>i,
+.logout>ul>a>li>i {
+    color: #126e0f;
+    font-size: 20px;
+    padding: 8px;
+}
+
+.menu_control>ul>a>.active,
+.active>i::before {
+    color: #fff;
+}
+
+.active>i {
+    color: #fff;
+}
+
+.menu_control>ul>a>li:hover,
+.logout>ul>a>li:hover {
+    background-color: rgb(114, 165, 11);
+}
+
+
+/* ---- hover ---- */
+
+.menu_control>ul>a>li:hover,
+.logout>ul>a>li:hover {
+    color: #fff;
+}
+
+.menu_control>ul>a>li:hover>i,
+.logout>ul>a>li:hover>i {
+    color: #fff;
+}
+
+
+/* ------------ */
+
+.col-right {
+    background-color: #f5f5f5;
+}
+
+.col-right .main {
+    display: block;
+    margin: 2%;
+}
+
+.title>a>h4 {
+    text-align: left;
+    font-size: 25px;
+    color: #222;
+}
+
+.main-table {
+    margin-top: 30px;
+    background-color: #fff;
+    padding: 2%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
+.header-table {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.add>a>h4 {
+    padding: 10px;
+    background-color: rgb(114, 165, 11);
+    width: 180px;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #fff;
+}
+
+.form-group {
+    margin-top: 11px;
+}
+
+tr>td {
+    height: 150px;
+    line-height: 150px;
+}
+
+.form-block {
+    width: 100%;
+}
+
+.col {
+    height: 50px;
+}
