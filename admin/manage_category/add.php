@@ -8,8 +8,8 @@
         }
 
         if (!empty($name)){
-          
-            $created_at = $updated_at = date('Y-m-d H:s:i');
+            date_default_timezone_set("Asia/Ho_Chi_Minh");
+            $created_at = $updated_at = date('Y-m-d H:i:s');
             //Luu vao db
             $name = str_replace('\"', '\\\"', $name);
             

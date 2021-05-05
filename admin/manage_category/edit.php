@@ -24,7 +24,7 @@
 
     if (!empty($name)){
       date_default_timezone_set("Asia/Ho_Chi_Minh");
-      $created_at = $updated_at = date('Y-m-d H:s:i');
+      $created_at = $updated_at = date('Y-m-d H:i:s');
       //Luu vao db
       $name = str_replace('\'', '\\\'', $name);
       $id = str_replace('\'', '\\\'', $id);
