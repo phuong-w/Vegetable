@@ -39,4 +39,12 @@ function executeSingleResult($sql) {
 	return $object;
 }
 
+function executeTotalRowsResult($sql){
+	$conn = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
+	$result = mysqli_query($conn, $sql);
+	$totalRows = mysqli_num_rows($result);
+
+	mysqli_close($conn);
+	return $totalRows;
+}
 ?>

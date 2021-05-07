@@ -24,13 +24,17 @@ body {
 }
 
 .tab-pane {
-    position: relative;
-    height: 400px;
+    /* position: relative;
+    height: 400px; */
 }
 
 .tab-pane>img {
-    position: absolute;
-    bottom: -72px;
+    /* position: absolute; */
+    /* bottom: -72px; */
+}
+
+.details {
+    margin-top: 80px;
 }
 
 .preview-pic {
@@ -45,7 +49,7 @@ body {
 }
 
 .tab-content img {
-    width: 100%;
+    width: 90%;
     -webkit-animation-name: opacity;
     animation-name: opacity;
     -webkit-animation-duration: .3s;
@@ -126,7 +130,7 @@ body {
 
 .add-to-cart,
 .like {
-    background: #ff9f1a;
+    background: #126e0f;
     padding: 1.2em 1.5em;
     border: none;
     text-transform: UPPERCASE;
@@ -138,7 +142,7 @@ body {
 
 .add-to-cart:hover,
 .like:hover {
-    background: #b36800;
+    background: #126e0f;
     color: #fff;
 }
 

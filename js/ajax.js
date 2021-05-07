@@ -26,3 +26,16 @@ function deleteProduct(id) {
         location.reload()
     })
 }
+
+function logoutAdmin() {
+    var option = confirm('Bạn có muốn rời khỏi đây không?')
+    if (!option) {
+        return;
+    }
+
+    $.post('logoutAjax.php', {
+        'action': 'logout'
+    }, function() {
+        location.replace('../index.php');
+    })
+}

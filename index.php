@@ -13,6 +13,7 @@ require_once ('./db/function.php');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
@@ -53,22 +54,27 @@ require_once ('./db/function.php');
             <div class="container">
                 <div class="row">
                     <div id="header-mid">
-                        <a href="" style="z-index: -1;">
+                        <a href="index.php">
                             <div id="logo">
                                 <img src="./images/logo.png" alt="Logo">
                             </div>
                         </a>
 
-                        <?php include_once './function/search.php';
-                        ?>
+                        <form action="./master_page/index.php" method="POST" class="search-form">
+                            <input type="text" name="textSearch" placeholder="Tìm kiếm: cà chua, dâu tây, bắp cải,..." required>
+                            <button type="submit">
+                                        <img src="./images/search.png" alt="search">
+                                        <span>Tìm kiếm</span>
+                            </button>
+                        </form>
 
                         <div id="groud-user-cart">
                             <div id="user">
                             <?php 
-                                    if (isset($_SESSION['username1']) && isset($_SESSION['password1'])){
+                                    if (isset($_SESSION['username']) && isset($_SESSION['password'])){
                                         echo '<span class="sayhi" style="position: relative;">
                                     <i class="fas fa-user" style="font-size: 18px; border: 1px solid darkseagreen; border-radius: 50%; padding: 5px; color: darkseagreen"></i>
-                                    <span id="username" style="font-size: 18px; padding: 0 5px">'.$_SESSION['fullname1'].'</span>
+                                    <span id="username" style="font-size: 18px; padding: 0 5px">'.$_SESSION['fullname'].'</span>
                                     <i class="fas fa-caret-down" style="font-size: 18px;"></i>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="#">Thông tin</a></li>
@@ -102,9 +108,15 @@ require_once ('./db/function.php');
                             </div>
 
                             <div id="cart">
-                                <a href="">
+                                <a href="./master_page/index.php?page_layout=bill">
                                     <img src="./images/shopping-cart.png" alt="shopping-cart">
-                                    <span>2</span>
+                                    
+                                    <?php if (isset($_SESSION['cart'])){
+                                        echo '<span>'.count($_SESSION['cart']).'</span>';
+                                        }else{
+                                            echo '';
+                                        } ?>
+                                    
                                 </a>
                             </div>
 
@@ -115,7 +127,7 @@ require_once ('./db/function.php');
                         <ul>
                             <li><a href="index.php">Trang chủ</a></li>
                             <li><a href="#">Nhà bán hàng</a></li>
-                            <li class="product"><a href="./product/index.php">Gian hàng</a></li>
+                            <li class="product"><a href="./master_page/index.php?page_layout=product">Gian hàng</a></li>
                             <li><a href="#">Sự khác biệt</a></li>
                             <li><a href="#">Tin tức</a></li>
                             <li><a href="#">Contact</a></li>
@@ -175,7 +187,7 @@ require_once ('./db/function.php');
                 <div class="container">
                     <div class="row">
                         <h2>Top Favorite Fruits</h2>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.</p>
+                        <p>Là những sản phẩm đã được chọn lọc kỹ càng từ Nông Trại Tươi Sạch. Chúng tôi cam kết chất lượng!</p>
                         <div class="block col-md-12">
                             <div class="element col-md-2">
                                 <a href="">
@@ -251,7 +263,7 @@ require_once ('./db/function.php');
                                 ?>
                             </ul>
                             <?php
-                                include_once 'product-home.php';
+                                include_once 'product-home.php'; //goi danh sach san pham
                             ?>
                             
                         </div>
@@ -294,7 +306,7 @@ require_once ('./db/function.php');
                             <h3 class="title-block">Đăng ký nhận tin khuyến mại</h3>
                             <form>
                                 <div class="input-group">
-                                    <input type="email" placeholder="Nhập email của bạn" class="email_footer">
+                                    <input type="email" placeholder="Nhập email của bạn" class="email_footer" required>
                                     <button class="button_footer">Đăng ký</button>
                                 </div>
                             </form>

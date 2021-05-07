@@ -140,8 +140,9 @@
                         foreach ($categoryList as $list){
                           if ($list['id'] == $id_category){
                           echo '<option selected value= '.$list['id'].'>'.$list['name'].'</option>';
-                          }
+                          }else{
                           echo '<option value= '.$list['id'].'>'.$list['name'].'</option>';
+                          }
                         }
                       ?>
                     </select>
@@ -159,7 +160,7 @@
 
                 <div class="form-group">
                     <label for="sale" class="form-label">Giảm giá (%)*</label>
-                    <input type="number" class="form-control" name="sale" id="sale" value="<?=$sale?>"/>
+                    <input type="number" class="form-control" name="sale" min="0" max="100" minlength="0" maxlength="100" id="sale" value="<?=$sale?>"/>
                 </div>
 
                 <div class="form-group">

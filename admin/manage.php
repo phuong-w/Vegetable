@@ -6,9 +6,9 @@
 
     $userAdmin ='';
     if (!empty($_SESSION)){
-        if (isset($_SESSION['username']) && isset($_SESSION['password'])){
-            $username = $_SESSION['username'];
-            $password = $_SESSION['password'];
+        if (isset($_SESSION['username2']) && isset($_SESSION['password2'])){
+            $username = $_SESSION['username2'];
+            $password = $_SESSION['password2'];
             $sql = "select * from user where username = '$username' and password = '$password' and permission = 2";
 
             $userAdmin = executeSingleResult($sql);
@@ -53,7 +53,7 @@
 
                         <span class="sayhi">
                             <i class="fas fa-user-check"></i>
-                            <span>Xin chào, <span id="username"><?php if (isset($_SESSION['fullname'])){ echo $_SESSION['fullname'];} ?></span></span>
+                            <span>Xin chào, <span id="username"><?php if (isset($_SESSION['fullname2'])){ echo $_SESSION['fullname2'];} ?></span></span>
                             <i class="fas fa-caret-down"></i>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#">Thông tin</a></li>
@@ -96,10 +96,10 @@
             </div>
 
             <div class="col-right">
-                <span class="back_home" style="text-align: center; display: block;width: 200px; float: right;padding: 30px 0;">
-                    <span style="display: block;">Trang chủ</span>
-                <i style="font-size: 30px; line-height: 12px;">&rarr;</i>
-                </span>
+                    <span onclick="logoutAdmin()" class="back_home" style="cursor:pointer; text-align: center; display: block;width: 200px; float: right;padding: 30px 0;">
+                        <span style="display: block;">Trang chủ</span>
+                    <i style="font-size: 30px; line-height: 12px;">&rarr;</i>
+                    </span>
                 <?php
                     if (empty($_GET['page_layout'])){
                         header('Location: manage.php?page_layout=home_admin');

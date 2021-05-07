@@ -1,7 +1,6 @@
 <?php
-    // $fullname = $address = $phone = $username = $password = '';
 
-    if (!empty($_POST)){
+    if (!empty($_POST['username'])){
         if (isset($_POST['fullname'])){
             $fullname = $_POST['fullname'];
         }
@@ -73,25 +72,25 @@
     <form method="POST">
       <div class="col-md-6">
           <div class="form-group">
-              <input type="text" class="form-control" name="fullname" placeholder="Họ tên" value=""/>
+              <input type="text" class="form-control" name="fullname" placeholder="Họ tên" required/>
           </div>
           <div class="form-group">
-              <input type="text" class="form-control" name="address" placeholder="Địa chỉ" value="" />
+              <input type="text" class="form-control" name="address" placeholder="Địa chỉ" required />
           </div>
           <div class="form-group">
-              <input type="text" maxlength="10" name="phone" minlength="10" class="form-control" placeholder="Phone" value="" />
+              <input type="text" maxlength="10" name="phone" minlength="10" class="form-control" placeholder="Phone" required />
           </div>
 
       </div>
       <div class="col-md-6">
           <div class="form-group">
-              <input type="text" class="form-control" name="username" placeholder="Tên tài khoản">
+              <input type="text" class="form-control" name="username" placeholder="Tên tài khoản" required>
           </div>
           <div class="form-group">
-              <input type="password" class="form-control" name="password" placeholder="Mật khẩu" value="" />
+              <input type="password" class="form-control" name="password" placeholder="Mật khẩu" required/>
           </div>
           <div class="form-group">
-              <input type="password" class="form-control" name="r_password" placeholder="Nhập lại mật khẩu" value="" />
+              <input type="password" class="form-control" name="r_password" placeholder="Nhập lại mật khẩu" required/>
           </div>
           <input type="submit" class="btnRegister" name="submit" value="Đăng ký"/>
       </div>

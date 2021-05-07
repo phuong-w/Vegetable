@@ -14,9 +14,9 @@
       $rows = executeSingleResult($sql);
 
       if ($rows > 0){
-        $_SESSION['username'] = $username;
-        $_SESSION['password'] = $password;
-        $_SESSION['fullname'] = $rows['fullname'];
+        $_SESSION['username2'] = $username;
+        $_SESSION['password2'] = $password;
+        $_SESSION['fullname2'] = $rows['fullname'];
 
         header('Location: manage.php');
 
@@ -48,16 +48,16 @@
 <body>
     <div class="wrapper">
       <?php
-        if (!isset($_SESSION['username'])){ // khong ton tai
+        if (!isset($_SESSION['username2'])){ // khong ton tai
       ?>
       <div class="login-form" style="display: block;">
         <h3>Đăng nhập</h3>
         <form method="POST">
             <div class="form-group">
-                <input type="text" class="form-control" id="username" name="username" placeholder="Tài khoản" value="" />
+                <input type="text" class="form-control" id="username" name="username" placeholder="Tài khoản" required />
             </div>
             <div class="form-group">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu" value="" />
+                <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu" required />
             </div>
             <div class="form-group">
                 <input type="submit" class="btnSubmit" name="submit" value="Đăng nhập" />

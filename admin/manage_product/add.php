@@ -128,7 +128,7 @@
 
                 <div class="form-group">
                     <label for="sale" class="form-label">Giảm giá (%)*</label>
-                    <input type="number" class="form-control" name="sale" id="sale" value=""/>
+                    <input type="number" class="form-control" min="0" max="100" minlength="0" maxlength="100" name="sale" id="sale" value=""/>
                 </div>
 
                 <div class="form-group">
