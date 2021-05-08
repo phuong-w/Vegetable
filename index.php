@@ -108,7 +108,7 @@ require_once ('./db/function.php');
                             </div>
 
                             <div id="cart">
-                                <a href="./master_page/index.php?page_layout=bill">
+                                <a href="./master_page/index.php?tab=bill">
                                     <img src="./images/shopping-cart.png" alt="shopping-cart">
                                     
                                     <?php if (isset($_SESSION['cart'])){
@@ -127,7 +127,7 @@ require_once ('./db/function.php');
                         <ul>
                             <li><a href="index.php">Trang chủ</a></li>
                             <li><a href="#">Nhà bán hàng</a></li>
-                            <li class="product"><a href="./master_page/index.php?page_layout=product">Gian hàng</a></li>
+                            <li class="product"><a href="./master_page/index.php?tab=product">Gian hàng</a></li>
                             <li><a href="#">Sự khác biệt</a></li>
                             <li><a href="#">Tin tức</a></li>
                             <li><a href="#">Contact</a></li>
@@ -252,13 +252,13 @@ require_once ('./db/function.php');
                             <h2 id="tile-product-2">Featured products</h2>
                             <p id="text-title-product"><span>&#8212;</span> Fresh from our farm <span>&#8212;</span></p>
                             <ul id="menu-product-home">
-                                <a href="index.php?page_layout=home"><li class="click">All Goods</li></a>
+                                <a href="index.php?tab=home"><li class="click">All Goods</li></a>
                                 <?php
                                     $sql = 'select * from category order by id asc';
                                     $categoryList = executeResult($sql);
 
                                     foreach ($categoryList as $category){
-                                        echo '<a href="index.php?page_layout=home&id='.$category['id'].'"><li>'.$category['name'].'</li></a>';
+                                        echo '<a href="index.php?tab=home&id='.$category['id'].'"><li>'.$category['name'].'</li></a>';
                                     }
                                 ?>
                             </ul>

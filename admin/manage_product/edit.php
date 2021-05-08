@@ -102,7 +102,7 @@
         echo $thumbnail_src;
         echo $thumbnail_src;
         execute($sql);
-        header('Location: manage.php?page_layout=manage_product');
+        header('Location: manage.php?tab=manage_product');
         die();
     }
       

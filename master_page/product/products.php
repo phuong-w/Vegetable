@@ -37,9 +37,9 @@
         if ($totalPages == 1){
             $listPage = '';
         }elseif($page == $i){
-            $listPage .= '<li class="page-item"><a style="border: 1px solid blanchedalmond;color: #fff; background: #80bb01" class="page-link" href="index.php?page_layout=product&page='.$i.'">'.$i.'</a></li>';
+            $listPage .= '<li class="page-item"><a style="border: 1px solid blanchedalmond;color: #fff; background: #80bb01" class="page-link" href="index.php?tab=product&page='.$i.'">'.$i.'</a></li>';
         }else{
-            $listPage .= '<li class="page-item"><a class="page-link" href="index.php?page_layout=product&page='.$i.'">'.$i.'</a></li>';
+            $listPage .= '<li class="page-item"><a class="page-link" href="index.php?tab=product&page='.$i.'">'.$i.'</a></li>';
         }
     }
 
@@ -70,7 +70,7 @@
         }else{
             foreach($productList as $row){
     ?>
-    <a href='index.php?page_layout=product_detail&id=<?=$row['id']?>'>
+    <a href='index.php?tab=product_detail&id=<?=$row['id']?>'>
         <div class="col-product-home">
                 <?php  
                 $divGroup = "";
@@ -83,7 +83,7 @@
                     $numSeconds = $date_today - $updated_at;
                     $numDay = round($numSeconds / (60*60*24)); // tinh ra ngay hien tai. Ham lam tron so round(num, chi so sau dau phay)
                     
-                    if ($numDay <= 2){
+                    if ($numDay <= 2){ //san pham dang ban trong 2 ngay la sp moi
                         $divGroup ="<div class='new-sale-group'>"."<span class='new'>&#8226; New</span>";
                     }else{
                         $divGroup ="<div class='new-sale-group' style='justify-content: flex-end'>";
@@ -103,7 +103,7 @@
             <div class="group-heart-cart-eye">
                 <a href=""><i class="far fa-heart"></i></a>
                 <a href="../function/addToCart.php?id=<?= $row['id']?>"><i class="fas fa-shopping-cart"></i></a>
-                <a href="index.php?page_layout=product_detail&id=<?= $row['id']?>"><i class="far fa-eye"></i></a>
+                <a href="index.php?tab=product_detail&id=<?= $row['id']?>"><i class="far fa-eye"></i></a>
             </div>
 
             <div class="title-product-home">

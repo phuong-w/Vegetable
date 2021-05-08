@@ -32,7 +32,7 @@
       $sql = "update category set name = '$name', created_at = '$created_at', updated_at = '$updated_at' where id = '$id'";
             
       execute($sql);
-      header('Location: manage.php?page_layout=manage_category');
+      header('Location: manage.php?tab=manage_category');
       die();
     }
 }

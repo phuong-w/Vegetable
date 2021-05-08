@@ -8,13 +8,13 @@
                       <h4 id="tile-product-2" style="text-align: center; font-weight: bold; margin-top: 0px;">MENU</h4>
 
                       <ul id="menu-product-home">
-                        <a href="index.php?page_layout=product"><li class="click">All Goods</li></a>
+                        <a href="index.php?tab=product"><li class="click">All Goods</li></a>
                         <?php
                             $sql = 'select * from category order by id asc';
                             $categoryList = executeResult($sql);
 
                             foreach ($categoryList as $category){
-                                echo '<a href="index.php?page_layout=product&id='.$category['id'].'"><li>'.$category['name'].'</li></a>';
+                                echo '<a href="index.php?tab=product&id='.$category['id'].'"><li>'.$category['name'].'</li></a>';
                             }
                         ?>
                       </ul>

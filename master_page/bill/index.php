@@ -7,6 +7,21 @@
 <div id="content">
     <hr>
     <div class="section-2 section">
+        <?php
+        if (isset($_SESSION['cart'])){
+            $arrayId = [];
+            foreach($_SESSION['cart'] as $id_product => $quantity){
+                $arrayId[] = $id_product; //truyen tat ca id vao bien kieu mang
+            }
+            // print_r($arrayId);
+            // die();
+            $stringId = implode(',', $arrayId); /*chuyen du lieu sang kieu chuoi, 
+                                                truyen vao ',' phan cach moi phan tu */
+            $sql = "select * from product where id in ($stringId)";
+            $productList =  executeResult($sql);
+            // print_r($productList);
+            // die();
+        ?>
         <div class="cart-wrap">
             <div class="container">
                 <div class="row">
@@ -23,19 +38,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                <?php
+                                    foreach($productList as $row){
+                                ?>
                                     <tr>
                                         <td>
                                             <div class="display-flex align-center">
                                                 <div class="img-product">
-                                                    <img src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg" alt="" class="mCS_img_loaded">
+                                                    <img src="<?=$row['thumbnail']?>" class="mCS_img_loaded">
                                                 </div>
                                                 <div class="name-product">
-                                                    Apple iPad Mini
-                                                    <br>G2356
+                                                    <?= $row['title']?>
                                                 </div>
-                                                <div class="price">
-                                                    $1,250.00
-                                                </div>
+                                                <?php
+                                                    if (isset($row['sale']) && $row['sale'] > 0){
+                                                        $sale = $row['sale']; //%
+                                                        $price = $row['price'];
+                                                        $priceNew = $price * (100 - $sale)/100;
+                                                        echo "<div class='price'>".currency_format($priceNew)."<br><span style='text-decoration: line-through; color: #989898;'>".currency_format($price)."</span></div>";
+                                                    }else{
+                                                        echo "<div class='price'>".currency_format($row['price'])."</div>";
+                                                    }
+                                                ?>
                                             </div>
                                         </td>
                                         <td class="product-count">
@@ -52,43 +76,13 @@
                                         </td>
                                         <td>
                                             <a href="#" title="">
-                                                <img src="images/icons/delete.png" alt="" class="mCS_img_loaded">
+                                                <i style="font-size: 22px; color: #989898" class="far fa-trash-alt"></i>
                                             </a>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="display-flex align-center">
-                                                <div class="img-product">
-                                                    <img src="https://www.91-img.com/pictures/laptops/asus/asus-x552cl-sx019d-core-i3-3rd-gen-4-gb-500-gb-dos-1-gb-61721-large-1.jpg" alt="" class="mCS_img_loaded">
-                                                </div>
-                                                <div class="name-product">
-                                                    Apple iPad Mini
-                                                    <br>G2356
-                                                </div>
-                                                <div class="price">
-                                                    $1,250.00
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="product-count">
-                                            <form action="#" class="count-inlineflex">
-                                                <div class="qtyminus">-</div>
-                                                <input type="text" name="quantity" value="1" class="qty">
-                                                <div class="qtyplus">+</div>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <div class="total">
-                                                $6,250.00
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <a href="#" title="">
-                                                <img src="images/icons/delete.png" alt="" class="mCS_img_loaded">
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    <?php
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                             <div class="coupon-box">
@@ -138,6 +132,16 @@
             </div>
         </div>
     </div>
+    <?php
+        }else{
+            echo "<script>
+                $.alert({
+                    title: 'Thông báo:',
+                    content: 'Không có sản phẩm để hiển thị'
+                });
+            </script>";
+        }
+    ?>
     <hr>
 
 </div>

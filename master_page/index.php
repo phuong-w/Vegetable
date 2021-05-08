@@ -2,6 +2,7 @@
 ob_start();
 session_start();
 require_once ('../db/function.php');
+require_once ('../db/symbol.php');
 
 ?>
 <!DOCTYPE html>
@@ -16,6 +17,8 @@ require_once ('../db/function.php');
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 
@@ -62,10 +65,10 @@ require_once ('../db/function.php');
                         </a>
 
                         <form action="index.php" method="POST" class="search-form">
-                            <input type="text" name="textSearch" placeholder="Tìm kiếm: cà chua, dâu tây, bắp cải,...">
+                            <input type="text" name="textSearch" placeholder="Tìm kiếm: cà chua, dâu tây, bắp cải,..." required>
                             <button type="submit">
-                                        <img src="../images/search.png" alt="search">
-                                        <span>Tìm kiếm</span>
+                                <img src="../images/search.png" alt="search">
+                                <span>Tìm kiếm</span>
                             </button>
                         </form>
 
@@ -109,7 +112,7 @@ require_once ('../db/function.php');
                             </div>
 
                             <div id="cart">
-                                <a href="index.php?page_layout=bill">
+                                <a href="index.php?tab=bill">
                                     <img src="../images/shopping-cart.png" alt="shopping-cart">
                                     
                                     <?php if (isset($_SESSION['cart'])){
@@ -140,10 +143,10 @@ require_once ('../db/function.php');
 
         <!--Nội dung trang-->
         <?php
-          if (!isset($_GET['page_layout'])){
+          if (!isset($_GET['tab'])){
             include_once './product/index.php';
           }else{
-            switch ($_GET['page_layout']){
+            switch ($_GET['tab']){
               case 'bill':
                 include_once './bill/index.php';
                 break;

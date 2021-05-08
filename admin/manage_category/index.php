@@ -7,7 +7,7 @@
             $page = 1;
         }
     
-    $rowPerPage = 3;
+    $rowPerPage = 4;
     $perRow = $page * $rowPerPage - $rowPerPage;
 
     if (isset($_POST['textSearch']) && $_POST['textSearch'] != null ){
@@ -34,9 +34,9 @@
         if ($totalPages == 1){
             $listPage = '';
         }elseif($page == $i){
-            $listPage .= '<li class="page-item"><a style="border: 1px solid blanchedalmond;color: #fff; background: #80bb01" style="color: rgb(114, 165, 11)" class="page-link" href="manage.php?page_layout=manage_category&page='.$i.'">'.$i.'</a></li>';
+            $listPage .= '<li class="page-item"><a style="border: 1px solid blanchedalmond;color: #fff; background: #80bb01" style="color: rgb(114, 165, 11)" class="page-link" href="manage.php?tab=manage_category&page='.$i.'">'.$i.'</a></li>';
         }else{
-            $listPage .= '<li class="page-item"><a style="color: rgb(114, 165, 11)" class="page-link" href="manage.php?page_layout=manage_category&page='.$i.'">'.$i.'</a></li>';
+            $listPage .= '<li class="page-item"><a style="color: rgb(114, 165, 11)" class="page-link" href="manage.php?tab=manage_category&page='.$i.'">'.$i.'</a></li>';
         }
     }
 ?>
@@ -50,7 +50,7 @@
     <div class="main-table">
         <div class="header-table">
             <div class="add">
-                <a href="manage.php?page_layout=add_category">
+                <a href="manage.php?tab=add_category">
                     <h4>Thêm danh mục mới</h4>
                 </a>
             </div>
@@ -98,7 +98,7 @@
                                 <td>'.$item['name'].'</td>
                                 <td>'.$item['created_at'].'</td>
                                 <td>
-                                    <a href="manage.php?page_layout=edit_category&id='.$item['id'].'"><button class ="btn btn-warning"> Sửa </button></a>
+                                    <a href="manage.php?tab=edit_category&id='.$item['id'].'"><button class ="btn btn-warning"> Sửa </button></a>
                                 </td>
                                 <td>
                                     <button class ="btn btn-danger" onclick="deleteCategory('.$item['id'].')"> Xóa </button>

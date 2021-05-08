@@ -78,12 +78,12 @@
                 <hr>
                 <div class="menu_control">
                     <ul>
-                        <a href="manage.php?page_layout=home_admin"><li class="active"><i class="fas fa-tachometer-alt"></i>Trang chủ quản trị</li></a>
-                        <a href="manage.php?page_layout=manage_category"><li><i class="fas fa-check-circle"></i>Quản lý danh mục</li></a>
-                        <a href="manage.php?page_layout=manage_product"><li><i class="fas fa-check-circle"></i>Quản lý sản phẩm</li></a>
-                        <a href="manage.php?page_layout=manage_customer"><li><i class="fas fa-users"></i>Quản lý khách hàng</li></a>
-                        <a href="manage.php?page_layout=manage_ads"><li><i class="fas fa-ad"></i>Quản lý quảng cáo</li></a>
-                        <a href="manage.php?page_layout=manage_config"><li><i class="fas fa-cog"></i>Cấu hình</li></a>
+                        <a href="manage.php?tab=home_admin"><li class="active"><i class="fas fa-tachometer-alt"></i>Trang chủ quản trị</li></a>
+                        <a href="manage.php?tab=manage_category"><li><i class="fas fa-check-circle"></i>Quản lý danh mục</li></a>
+                        <a href="manage.php?tab=manage_product"><li><i class="fas fa-check-circle"></i>Quản lý sản phẩm</li></a>
+                        <a href="manage.php?tab=manage_customer"><li><i class="fas fa-users"></i>Quản lý khách hàng</li></a>
+                        <a href="manage.php?tab=manage_ads"><li><i class="fas fa-ad"></i>Quản lý quảng cáo</li></a>
+                        <a href="manage.php?tab=manage_config"><li><i class="fas fa-cog"></i>Cấu hình</li></a>
                     </ul>
                 </div>
                 <hr>
@@ -101,11 +101,11 @@
                     <i style="font-size: 30px; line-height: 12px;">&rarr;</i>
                     </span>
                 <?php
-                    if (empty($_GET['page_layout'])){
-                        header('Location: manage.php?page_layout=home_admin');
+                    if (empty($_GET['tab'])){
+                        header('Location: manage.php?tab=home_admin');
                     }
 
-                    switch ($_GET['page_layout']) {
+                    switch ($_GET['tab']) {
                         
                         case 'manage_category' :
                             include_once './manage_category/index.php';

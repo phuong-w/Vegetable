@@ -17,7 +17,7 @@
                   values ("'.$name.'", "'.$created_at.'", "'.$updated_at.'")';
                   
             execute($sql);
-            header('Location: manage.php?page_layout=manage_category');
+            header('Location: manage.php?tab=manage_category');
             die();
           }
           

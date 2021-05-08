@@ -23,7 +23,7 @@
         
         foreach($productList as $row){
     ?>  
-    <a href='./master_page/index.php?page_layout=product_detail&id=<?=$row['id']?>'>
+    <a href='./master_page/index.php?tab=product_detail&id=<?=$row['id']?>'>
         <div class="col-product-home">
             
                 <?php 
@@ -37,7 +37,7 @@
                         $numSeconds = $date_today - $updated_at;
                         $numDay = round($numSeconds / (60*60*24)); // tinh ra ngay hien tai. Ham lam tron so round(num, chi so sau dau phay)
 
-                        if ($numDay <= 2){
+                        if ($numDay <= 2){ //sp update chua den 2 ngay la sp moi
                             $divGroup ="<div class='new-sale-group'>"."<span class='new'>&#8226; New</span>";
                         }else{
                             $divGroup ="<div class='new-sale-group' style='justify-content: flex-end'>";
@@ -60,7 +60,7 @@
             <div class="group-heart-cart-eye">
                 <a href=""><i class="far fa-heart"></i></a>
                 <a href="./function/addToCart.php?id=<?= $row['id']?>"><i class="fas fa-shopping-cart"></i></a>
-                <a href="./master_page/index.php?page_layout=product_detail&id=<?= $row['id']?>"><i class="far fa-eye"></i></a>
+                <a href="./master_page/index.php?tab=product_detail&id=<?= $row['id']?>"><i class="far fa-eye"></i></a>
             </div>
 
             <div class="title-product-home">

@@ -7,7 +7,7 @@
             $page = 1;
         }
     
-    $rowPerPage = 3; //so san pham hien thi
+    $rowPerPage = 4; //so san pham hien thi
     $perRow = $page * $rowPerPage - $rowPerPage;
     /**
     * soSanPhamHienThi = 3
@@ -21,7 +21,7 @@
     * 6*3-3 = 15 : 15
      */
 
-    if (isset($_POST['textSearch']) && $_POST['textSearch'] != ''){
+    if (isset($_POST['textSearch']) && $_POST['textSearch'] != null){
         $textSearch = $_POST['textSearch'];
         
         $text = trim($textSearch); //xoa khoang trang dau va cuoi (result: 'nguyen thai phuong')
@@ -45,10 +45,10 @@
         }elseif($page == $i){
             $listPage .= '<li class="page-item"><a style="border: 1px solid blanchedalmond;
             color: #fff; background: #80bb01" style="color: rgb(114, 165, 11)" class="page-link"
-            href="manage.php?page_layout=manage_product&page='.$i.'">'.$i.'</a></li>';
+            href="manage.php?tab=manage_product&page='.$i.'">'.$i.'</a></li>';
         }else{
             $listPage .= '<li class="page-item"><a style="color: rgb(114, 165, 11)"
-            class="page-link" href="manage.php?page_layout=manage_product&page='.$i.'">'.$i.'</a></li>';
+            class="page-link" href="manage.php?tab=manage_product&page='.$i.'">'.$i.'</a></li>';
         }
     }
 ?>
@@ -62,7 +62,7 @@
     <div class="main-table">
         <div class="header-table">
             <div class="add">
-                <a href="manage.php?page_layout=add_product">
+                <a href="manage.php?tab=add_product">
                     <h4>Thêm sản phẩm mới</h4>
                 </a>
             </div>
@@ -124,7 +124,7 @@
                                 <td>'.$item['quantity'].'</td>
                                 <td>'.$item['updated_at'].'</td>
                                 <td>
-                                    <a href="manage.php?page_layout=edit_product&id='.$item['id'].'"><button class ="btn btn-warning"> Sửa </button></a>
+                                    <a href="manage.php?tab=edit_product&id='.$item['id'].'"><button class ="btn btn-warning"> Sửa </button></a>
                                 </td>
                                 <td>
                                     <button class ="btn btn-danger" onclick="deleteProduct('.$item['id'].')"> Xóa </button>

@@ -75,7 +75,7 @@
                 values('$title', '$price', '$thumbnail_src ', '$quantity', '$sale','$content', '$id_category', '$created_at', '$updated_at')";
                   
             execute($sql);
-            header('Location: manage.php?page_layout=manage_product');
+            header('Location: manage.php?tab=manage_product');
             die();
           }
           
