@@ -112,10 +112,15 @@ require_once ('./db/function.php');
                                     <img src="./images/shopping-cart.png" alt="shopping-cart">
                                     
                                     <?php if (isset($_SESSION['cart'])){
-                                        echo '<span>'.count($_SESSION['cart']).'</span>';
+                                        $quantityCart = 0;
+                                        foreach($_SESSION['cart'] as $id=>$quantity){
+                                            $quantityCart += $quantity;
+                                        }
+                                        echo '<span>'.$quantityCart.'</span>';
                                         }else{
                                             echo '';
-                                        } ?>
+                                        } 
+                                    ?>
                                     
                                 </a>
                             </div>

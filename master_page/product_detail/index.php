@@ -1,6 +1,5 @@
 <?php
 require_once ('../db/function.php');
-require_once ('../db/symbol.php');
 
 if (isset($_GET['id'])){
 $id = $_GET['id'];

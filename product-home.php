@@ -1,7 +1,7 @@
 <?php
   require_once ('./db/function.php');
 
-  require_once ('./db/symbol.php');
+  require_once ('./function/symbol.php');
 
   if (isset($_GET['id']) != null){
     $id_category = $_GET['id'];
