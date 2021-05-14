@@ -89,20 +89,20 @@
                         <th width="50px">Số lượng</th>
                         <th>Ngày cập nhật</th>
                         <th width="50px"></th>
-                        <th width="50px"></th>
+                        <th width="115px"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     if (isset($_POST['textSearch']) && $_POST['textSearch'] != ''){
                         //Lay san pham theo du lieu input search (phan trang)
-                        $sql = "select product.id, product.title, product.price, product.quantity ,
+                        $sql = "select product.id, product.title, product.price, product.quantity, product.stop_buy,
                          product.thumbnail, product.updated_at, category.name category_name from 
                          product left join category on product.id_category = category.id where product.title like ('$textNew') order by 
                          product.id desc limit $perRow, $rowPerPage" ;
                     }else{
                         // Lay danh tat ca san pham theo phan trang
-                        $sql = "select product.id, product.title, product.price, product.quantity ,
+                        $sql = "select product.id, product.title, product.price, product.quantity, product.stop_buy,
                         product.thumbnail, product.updated_at, category.name category_name from product
                         left join category on product.id_category = category.id order by product.id desc 
                         limit $perRow, $rowPerPage" ;
@@ -114,21 +114,30 @@
                         echo "Không tìm thấy dữ liệu";
                     }else{
                         $index = 1;
+                        $updated_at ='';
                         foreach ($productList as $item){
                             echo '<tr>
                                 <td>'.($index++).'</td>
                                 <td style="width:150px"><img width="100%" src="'.$item['thumbnail'].'"></td>
                                 <td>'.$item['title'].'</td>
-                                <td>'.$item['price'].'</td>
+                                <td>'.currency_format($item['price']).'</td>
                                 <td>'.$item['category_name'].'</td>
                                 <td>'.$item['quantity'].'</td>
                                 <td>'.$item['updated_at'].'</td>
                                 <td>
                                     <a href="manage.php?tab=edit_product&id='.$item['id'].'"><button class ="btn btn-warning"> Sửa </button></a>
                                 </td>
-                                <td>
-                                    <button class ="btn btn-danger" onclick="deleteProduct('.$item['id'].')"> Xóa </button>
-                                </td>
+                                <td>';
+
+                                date_default_timezone_set("Asia/Ho_Chi_Minh");
+                                $updated_at = date('Y-m-d H:i:s');
+                                
+                                    
+                                if (isset($item['stop_buy']) && $item['stop_buy'] == 1) 
+                                    echo '<button style="border: none;background: rgb(114, 165, 11);" class ="btn btn-danger" onclick="stop_buyProduct('.$item['id'].', '.$item['stop_buy'].', \''.$updated_at.'\');" >Mở bán</button>';
+                                else echo '<button class ="btn btn-danger" onclick="stop_buyProduct('.$item['id'].', '.$item['stop_buy'].', \''.$updated_at.'\');">Ngưng bán</button>';
+                            
+                            echo' </td>
                             </tr>';
                         }
                     }

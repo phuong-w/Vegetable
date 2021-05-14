@@ -16,6 +16,8 @@ require_once ('./db/function.php');
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 
@@ -35,7 +37,7 @@ require_once ('./db/function.php');
                         <div class="others">
                             <ul>
                                 <li>
-                                    <a href="">
+                                    <a href="./master_page/index.php?tab=shipping_bill">
                                         <img src="./images/shipped.png" alt="shipped">
                                         <span>Kiểm tra đơn hàng</span>
                                     </a>
@@ -78,7 +80,7 @@ require_once ('./db/function.php');
                                     <i class="fas fa-caret-down" style="font-size: 18px;"></i>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="#">Thông tin</a></li>
-                                        <li><a href="#">Đơn hàng</a></li>
+                                        <li><a href="./master_page/index.php?tab=shipping_bill">Đơn hàng</a></li>
                                         <li><a href="./function/logout.php">Đăng xuất</a></li>
                                     </ul>
                                     </span>';
@@ -89,14 +91,18 @@ require_once ('./db/function.php');
                                 <ul>
                                     <li><span class='span_space' id='click_login'>Đăng nhập</span>
                                     <?php
-                                        include_once './function/login.php';
+                                        if(empty($_SESSION['username'])){
+                                            include_once './function/login.php';
+                                        }
                                     ?>
 
                                     </li>
                                     <li id='cheo'>/</li>
                                     <li><span class='span_space' id='click_register' >Đăng ký</span>
                                     <?php 
-                                        include_once './function/register.php';
+                                        if(empty($_SESSION['username'])){
+                                            include_once './function/register.php';
+                                        }
                                     ?>
                                     </li>
 
@@ -117,9 +123,12 @@ require_once ('./db/function.php');
                                             $quantityCart += $quantity;
                                         }
                                         echo '<span>'.$quantityCart.'</span>';
-                                        }else{
-                                            echo '';
-                                        } 
+                                        if ($quantityCart == 0){
+                                            unset($_SESSION['cart']);
+                                        }
+                                    }else{
+                                        echo '';
+                                    } 
                                     ?>
                                     
                                 </a>
@@ -416,6 +425,7 @@ require_once ('./db/function.php');
         </div>
     </div>
     <script src="./js/my_jquery_functions.js"></script>
+    <script src="./js/ajax.js"></script>
 </body>
 
 </html>

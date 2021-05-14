@@ -13,7 +13,7 @@
 
     if (isset($_GET['id']) && $_GET['id'] != ''){
         $id_category = $_GET['id'];
-        $sql2 = "select product.id from product where id_category=".$id_category;
+        $sql2 = "select product.id from product where product.stop_buy = 0 and id_category=".$id_category;
 
     }elseif (isset($_POST['textSearch']) && $_POST['textSearch'] != ''){
         $textSearch = $_POST['textSearch'];
@@ -22,9 +22,9 @@
         $textNew = implode('%', $arrayText); //chen ky tu vao tung phan tu cua mang, tra lai chuoi string
         $textNew = '%'.$textNew.'%'; //bo xung ky tu vao dau va cuoi
 
-        $sql2 = "select product.id from product where title like ('$textNew')";
+        $sql2 = "select product.id from product where product.stop_buy = 0 and title like ('$textNew')";
     }else{
-        $sql2 = "select product.id from product";
+        $sql2 = "select product.id from product where product.stop_buy = 0";
     }
 
     $rowPerPage = 8;
@@ -47,15 +47,15 @@
     $id_category = $_GET['id'];
 
     $sql = "select product.id, product.title, product.thumbnail, product.price, product.sale, product.updated_at 
-    from product where product.id_category = '$id_category' order by product.id desc limit $perRow, $rowPerPage";
+    from product where product.stop_buy = 0 and product.id_category = '$id_category' order by product.id desc limit $perRow, $rowPerPage";
     $productList = executeResult($sql);
   }else{
       if (isset($_POST['textSearch']) && $_POST['textSearch'] != null){
         $sql = "select product.id, product.title, product.thumbnail, product.price, product.sale, product.updated_at 
-        from product where product.title like ('$textNew') order by product.id desc limit $perRow, $rowPerPage";
+        from product where product.stop_buy = 0 and product.title like ('$textNew') order by product.id desc limit $perRow, $rowPerPage";
       }else{
         $sql = "select product.id, product.title, product.thumbnail, product.price, product.sale, product.updated_at 
-        from product order by product.id desc limit $perRow, $rowPerPage";
+        from product where product.stop_buy = 0 order by product.id desc limit $perRow, $rowPerPage";
       }
         $productList = executeResult($sql);
   }
@@ -102,7 +102,7 @@
 
             <div class="group-heart-cart-eye">
                 <a href=""><i class="far fa-heart"></i></a>
-                <a href="../function/addToCart.php?id=<?= $row['id']?>"><i class="fas fa-shopping-cart"></i></a>
+                <a onclick="addToCart('<?=$row['id']?>')"><i class="fas fa-shopping-cart"></i></a>
                 <a href="index.php?tab=product_detail&id=<?= $row['id']?>"><i class="far fa-eye"></i></a>
             </div>
 

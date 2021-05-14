@@ -72,8 +72,25 @@
         $id_category = $_POST['id_category'];
     }
 
+    move_uploaded_file($tmp_name, 'images/' .  $thumbnail);
+    if ($_FILES['thumbnail']['name'] != ''){
+        $thumbnail = $_FILES['thumbnail']['name'];
+        $thumbnail_src = '../images/products/'.$thumbnail;
+    }
 
-    if (!empty($title)){
+    $sqldp = "select * from product where title = '$title'";
+    $check = executeSingleResult($sqldp);
+
+    if (isset($check) && $check > 0 && $check['title'] == $title &&
+        $check['id_category'] == $id_category && $check['content'] == $content &&
+        $check['price'] == $price && $check['quantity'] == $quantity && $check['sale'] == $sale && $check['thumbnail'] == $thumbnail_src){
+    echo "<script>
+        $.alert({
+            title: 'Thông báo:',
+            content: 'Dữ liệu không thay đổi',
+        });
+    </script>";
+        }elseif (!empty($title)){
         date_default_timezone_set("Asia/Ho_Chi_Minh");
         $created_at = $updated_at = date('Y-m-d H:i:s');
         //check loi dau
@@ -85,13 +102,6 @@
         $thumbnail_src = str_replace('\'', '\\\'', $thumbnail_src);
         $quantity = str_replace('\'', '\\\'', $quantity);
         $sale = str_replace('\'', '\\\'', $sale);
-
-
-        move_uploaded_file($tmp_name, 'images/' .  $thumbnail);
-        if ($_FILES['thumbnail']['name'] != ''){
-          $thumbnail = $_FILES['thumbnail']['name'];
-          $thumbnail_src = '../images/products/'.$thumbnail;
-        }
         
 
         // $thumbnail_src += $thumbnail;
@@ -121,7 +131,7 @@
             <form  method="POST" class="form-block" enctype="multipart/form-data"> 
                 <div class="form-group">
                     <label for="title" class="form-label">Tên sản phẩm*</label>
-                    <input type="text" class="form-control" id ="title" name="title" value="<?=$title?>" />
+                    <input type="text" class="form-control" id ="title" required name="title" value="<?=$title?>" />
                 </div>
 
                 <div class="form-group">
@@ -150,12 +160,12 @@
 
                 <div class="form-group">
                     <label for="price" class="form-label">Giá bán*</label>
-                    <input type="number" class="form-control" name="price" id="price" value="<?=$price?>"/>
+                    <input type="number" class="form-control" name="price" id="price" required value="<?=$price?>"/>
                 </div>
 
                 <div class="form-group">
                     <label for="quantity" class="form-label">Số lượng*</label>
-                    <input type="number" class="form-control" name="quantity" id="quantity" value="<?=$quantity?>"/>
+                    <input type="number" class="form-control" name="quantity" id="quantity" required value="<?=$quantity?>"/>
                 </div>
 
                 <div class="form-group">

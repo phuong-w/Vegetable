@@ -72,7 +72,7 @@
                         <th width="50px">STT</th>
                         <th>Tên danh mục</th>
                         <th>Ngày khởi tạo</th>
-                        <th width="50px"></th>
+                        <th>Ngày sửa đổi</th>
                         <th width="50px"></th>
                     </tr>
                 </thead>
@@ -94,14 +94,12 @@
                         $index = 1;
                         foreach ($categoryList as $item){
                             echo '<tr style="line-height: 25px; min-height: 25px;height: 25px;">
-                                <td>'.($index++).'</td>
-                                <td>'.$item['name'].'</td>
-                                <td>'.$item['created_at'].'</td>
-                                <td>
+                                <td style="line-height: 50px;">'.($index++).'</td>
+                                <td style="line-height: 50px;">'.$item['name'].'</td>
+                                <td  style="line-height: 50px;">'.$item['created_at'].'</td>
+                                <td style="line-height: 50px;">'.$item['updated_at'].'</td>
+                                <td  style="line-height: 50px;">
                                     <a href="manage.php?tab=edit_category&id='.$item['id'].'"><button class ="btn btn-warning"> Sửa </button></a>
-                                </td>
-                                <td>
-                                    <button class ="btn btn-danger" onclick="deleteCategory('.$item['id'].')"> Xóa </button>
                                 </td>
                             </tr>';
                         }

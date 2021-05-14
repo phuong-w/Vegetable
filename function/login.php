@@ -34,7 +34,7 @@
             <input type="text" class="form-control" id="username" name="username" placeholder="Tài khoản" required />
         </div>
         <div class="form-group">
-            <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu" required />
+            <input type="password" class="form-control" id="passwordLogin" name="password" placeholder="Mật khẩu" required />
         </div>
         
         <div class="form-group"> 

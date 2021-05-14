@@ -43,41 +43,55 @@
 
         //check select option
         if ($_POST['id_category'] == 'unselect'){
-            echo '<span style="color: red;">{*}</span>';
+            echo "<script>
+            $.alert({
+                title: 'Thông báo:',
+                content: 'Chưa chọn danh mục',
+            });
+            </script>";
         }else{
             $id_category = $_POST['id_category'];
         }
 
+        $sqldp = "select id from product where title = '$title'";
+        $checkName = executeSingleResult($sqldp);
 
-        if (!empty($title)){
-            date_default_timezone_set("Asia/Ho_Chi_Minh");
-            $created_at = $updated_at = date('Y-m-d H:i:s');
-            //check loi dau
-            $id = str_replace('\'', '\\\'', $id);
-            $id_category = str_replace('\'', '\\\'', $id_category);
-            $title = str_replace('\'', '\\\'', $title);
-            $price = str_replace('\'', '\\\'', $price);
-            $content = str_replace('\'', '\\\'', $content);
-            $thumbnail_src = str_replace('\'', '\\\'', $thumbnail_src);
-            $quantity = str_replace('\'', '\\\'', $quantity);
-            $sale = str_replace('\'', '\\\'', $sale);
-            
-            
-			$path = str_replace('\\', '/', dirname(getcwd(),1));
-            
-            move_uploaded_file($tmp_name, $path.'/images/' .  $thumbnail);
+        if (isset($checkName) && $checkName > 0){
+        echo "<script>
+            $.alert({
+                title: 'Thông báo:',
+                content: 'Tên đã tồn tại',
+            });
+        </script>";
+        }elseif (!empty($title)){
+                date_default_timezone_set("Asia/Ho_Chi_Minh");
+                $created_at = $updated_at = date('Y-m-d H:i:s');
+                //check loi dau
+                $id = str_replace('\'', '\\\'', $id);
+                $id_category = str_replace('\'', '\\\'', $id_category);
+                $title = str_replace('\'', '\\\'', $title);
+                $price = str_replace('\'', '\\\'', $price);
+                $content = str_replace('\'', '\\\'', $content);
+                $thumbnail_src = str_replace('\'', '\\\'', $thumbnail_src);
+                $quantity = str_replace('\'', '\\\'', $quantity);
+                $sale = str_replace('\'', '\\\'', $sale);
+                
+                
+                $path = str_replace('\\', '/', dirname(getcwd(),1));
+                
+                move_uploaded_file($tmp_name, $path.'/images/' .  $thumbnail);
 
-            // $thumbnail_src += $thumbnail;
-            // //Luu vao db
-            $thumbnail_src = $thumbnail_src.$thumbnail;
-            
-            $sql = "insert into product(title, price, thumbnail, quantity, sale, content, id_category, created_at, updated_at)
-                values('$title', '$price', '$thumbnail_src ', '$quantity', '$sale','$content', '$id_category', '$created_at', '$updated_at')";
-                  
-            execute($sql);
-            header('Location: manage.php?tab=manage_product');
-            die();
-          }
+                // $thumbnail_src += $thumbnail;
+                // //Luu vao db
+                $thumbnail_src = $thumbnail_src.$thumbnail;
+                
+                $sql = "insert into product(title, price, thumbnail, quantity, sale, content, id_category, created_at, updated_at)
+                    values('$title', '$price', '$thumbnail_src ', '$quantity', '$sale','$content', '$id_category', '$created_at', '$updated_at')";
+                    
+                execute($sql);
+                header('Location: manage.php?tab=manage_product');
+                die();
+            }
           
     }
 ?>
@@ -93,7 +107,7 @@
             <form  method="POST" class="form-block" enctype="multipart/form-data"> 
                 <div class="form-group">
                     <label for="title" class="form-label">Tên sản phẩm*</label>
-                    <input type="text" class="form-control" id ="title" name="title" value="" />
+                    <input type="text" class="form-control" id ="title" name="title" required/>
                 </div>
 
                 <div class="form-group">
@@ -118,17 +132,17 @@
 
                 <div class="form-group">
                     <label for="price" class="form-label">Giá bán*</label>
-                    <input type="number" class="form-control" name="price" id="price" value=""/>
+                    <input type="number" class="form-control" min="0" name="price" id="price" required/>
                 </div>
 
                 <div class="form-group">
                     <label for="quantity" class="form-label">Số lượng*</label>
-                    <input type="number" class="form-control" name="quantity" id="quantity" value=""/>
+                    <input type="number" class="form-control" min="1" max="500" name="quantity" id="quantity" required/>
                 </div>
 
                 <div class="form-group">
                     <label for="sale" class="form-label">Giảm giá (%)*</label>
-                    <input type="number" class="form-control" min="0" max="100" minlength="0" maxlength="100" name="sale" id="sale" value=""/>
+                    <input type="number" class="form-control" min="0" max="100" minlength="0" maxlength="100" name="sale" id="sale"/>
                 </div>
 
                 <div class="form-group">

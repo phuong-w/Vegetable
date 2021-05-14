@@ -3,6 +3,7 @@
     session_start();
 
     require_once ('../db/function.php');
+    require_once ('../function/symbol.php');
 
     $userAdmin ='';
     if (!empty($_SESSION)){
@@ -32,6 +33,8 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
     <!-- include summernote css/js -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
@@ -81,9 +84,9 @@
                         <a href="manage.php?tab=home_admin"><li class="active"><i class="fas fa-tachometer-alt"></i>Trang chủ quản trị</li></a>
                         <a href="manage.php?tab=manage_category"><li><i class="fas fa-check-circle"></i>Quản lý danh mục</li></a>
                         <a href="manage.php?tab=manage_product"><li><i class="fas fa-check-circle"></i>Quản lý sản phẩm</li></a>
-                        <a href="manage.php?tab=manage_customer"><li><i class="fas fa-users"></i>Quản lý khách hàng</li></a>
-                        <a href="manage.php?tab=manage_ads"><li><i class="fas fa-ad"></i>Quản lý quảng cáo</li></a>
-                        <a href="manage.php?tab=manage_config"><li><i class="fas fa-cog"></i>Cấu hình</li></a>
+                        <a href="manage.php?tab=manage_customer"><li><i class="fas fa-users"></i>Quản lý tài khoản</li></a>
+                        <!-- <a href="manage.php?tab=manage_ads"><li><i class="fas fa-ad"></i>Quản lý quảng cáo</li></a> -->
+                        <!-- <a href="manage.php?tab=manage_config"><li><i class="fas fa-cog"></i>Cấu hình</li></a> -->
                     </ul>
                 </div>
                 <hr>
@@ -157,6 +160,26 @@
 
     <script src="../js/admin_jquery.js"></script>
     <script src="../js/ajax.js"></script>
+    <script src="../js/my_jquery_functions.js"></script>
+    <script>
+    function actionBuy(id) {
+        var option = confirm('Xác nhận hành động?')
+        if (!option) {
+            return;
+        }
+
+        $.post('./home_admin/actionBuy.php', {
+            'action': 'true',
+            'id': id
+        }, function(data) {
+            alert(data);
+
+            location.reload();
+        })
+    }
+
+    </script>
+    
 </body>
 
 </html>

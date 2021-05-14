@@ -7,7 +7,16 @@
           $name = $_POST['add_name_category'];
         }
 
-        if (!empty($name)){
+        $sqldp = "select * from category where name = '$name'";
+        $checkName = executeSingleResult($sqldp);
+        if (isset($checkName) && $checkName > 0){
+            echo "<script>
+                $.alert({
+                    title: 'Thông báo:',
+                    content: 'Tên đã tồn tại',
+                });
+            </script>";
+        }elseif (!empty($name)){
             date_default_timezone_set("Asia/Ho_Chi_Minh");
             $created_at = $updated_at = date('Y-m-d H:i:s');
             //Luu vao db
@@ -36,7 +45,7 @@
             <form method="POST" class="form-block">
                 <div class="form-group">
                     <label for="add_name_category" class="form-label">Tên danh mục*</label>
-                    <input type="text" class="form-control" id ="add_name_category" name="add_name_category" value="" />
+                    <input type="text" class="form-control" id ="add_name_category" name="add_name_category" required />
                 </div>
                 <button class="btn btn-success">Thêm mới</button>
             </form>

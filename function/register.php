@@ -1,23 +1,22 @@
 <?php
-
-    if (!empty($_POST['username'])){
-        if (isset($_POST['fullname'])){
-            $fullname = $_POST['fullname'];
+    if (!empty($_POST['usernameR'])){
+        if (isset($_POST['fullnameR'])){
+            $fullname = $_POST['fullnameR'];
         }
-        if (isset($_POST['address'])){
-            $address = $_POST['address'];
+        if (isset($_POST['addressR'])){
+            $address = $_POST['addressR'];
         }
-        if (isset($_POST['phone'])){
-            $phone = $_POST['phone'];
+        if (isset($_POST['phoneR'])){
+            $phone = $_POST['phoneR'];
         }
-        if (isset($_POST['username'])){
-            $username = $_POST['username'];
+        if (isset($_POST['usernameR'])){
+            $username = $_POST['usernameR'];
         }
-        if (isset($_POST['password'])){
-            $password = $_POST['password'];
+        if (isset($_POST['passwordR'])){
+            $password = $_POST['passwordR'];
         }
-        if (isset($_POST['r_password'])){
-            $r_password = $_POST['r_password'];
+        if (isset($_POST['r_passwordR'])){
+            $r_password = $_POST['r_passwordR'];
         }
 
         $sql1 = "select * from user where username = '$username' ";
@@ -28,13 +27,13 @@
         if ($username_slq != ''){
             $check = false;
             $error_username = "Tai khoan da ton tai!";
-            echo $error_username;
-            die();
+            // echo $error_username;
+            // header('location:  index.php');
         }else if ($password != $r_password){
             $check = false;
             $error_password = "Nhap lai mat khau khong dung";
-            echo $error_password;
-            die();
+            // echo $error_password;
+            // header('location:  index.php');
         }else{
             $check = true;
         }
@@ -72,27 +71,27 @@
     <form method="POST">
       <div class="col-md-6">
           <div class="form-group">
-              <input type="text" class="form-control" name="fullname" placeholder="Họ tên" required/>
+              <input type="text" class="form-control" name="fullnameR" placeholder="Họ tên" required/>
           </div>
           <div class="form-group">
-              <input type="text" class="form-control" name="address" placeholder="Địa chỉ" required />
+              <input type="text" class="form-control" name="addressR" placeholder="Địa chỉ" required />
           </div>
           <div class="form-group">
-              <input type="text" maxlength="10" name="phone" minlength="10" class="form-control" placeholder="Phone" required />
+              <input type="text" maxlength="10" name="phoneR" minlength="10" class="form-control" placeholder="Phone" required />
           </div>
 
       </div>
       <div class="col-md-6">
           <div class="form-group">
-              <input type="text" class="form-control" name="username" placeholder="Tên tài khoản" required>
+              <input type="text" class="form-control" name="usernameR" placeholder="Tên tài khoản" required>
           </div>
           <div class="form-group">
-              <input type="password" class="form-control" name="password" placeholder="Mật khẩu" required/>
+              <input type="password" class="form-control" id="passwordR" name="passwordR" placeholder="Mật khẩu" required/>
           </div>
           <div class="form-group">
-              <input type="password" class="form-control" name="r_password" placeholder="Nhập lại mật khẩu" required/>
+              <input type="password" class="form-control" id="r_passwordR" name="r_passwordR" placeholder="Nhập lại mật khẩu" required/>
           </div>
-          <input type="submit" class="btnRegister" name="submit" value="Đăng ký"/>
+          <input onclick="checkRegister()" type="submit" class="btnRegister" name="submit" value="Đăng ký"/>
       </div>
     </form>
   </div>  

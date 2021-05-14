@@ -39,7 +39,7 @@ require_once ('../function/symbol.php');
                         <div class="others">
                             <ul>
                                 <li>
-                                    <a href="">
+                                    <a href="index.php?tab=shipping_bill">
                                         <img src="../images/shipped.png" alt="shipped">
                                         <span>Kiểm tra đơn hàng</span>
                                     </a>
@@ -82,7 +82,7 @@ require_once ('../function/symbol.php');
                                     <i class="fas fa-caret-down" style="font-size: 18px;"></i>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="#">Thông tin</a></li>
-                                        <li><a href="#">Đơn hàng</a></li>
+                                        <li><a href="index.php?tab=shipping_bill">Đơn hàng</a></li>
                                         <li><a href="../function/logout.php">Đăng xuất</a></li>
                                     </ul>
                                     </span>';
@@ -93,14 +93,18 @@ require_once ('../function/symbol.php');
                                 <ul>
                                     <li><span class='span_space' id='click_login'>Đăng nhập</span>
                                     <?php
-                                        include_once '../function/login.php';
+                                        if(empty($_SESSION['username'])){
+                                            include_once '../function/login.php';
+                                        }
                                     ?>
 
                                     </li>
                                     <li id='cheo'>/</li>
                                     <li><span class='span_space' id='click_register' >Đăng ký</span>
                                     <?php 
-                                        include_once '../function/register.php';
+                                        if (empty($_SESSION['username'])){
+                                            include_once '../function/register.php';
+                                        }
                                     ?>
                                     </li>
 
@@ -115,15 +119,20 @@ require_once ('../function/symbol.php');
                                 <a href="index.php?tab=bill">
                                     <img src="../images/shopping-cart.png" alt="shopping-cart">
                                     
-                                    <?php if (isset($_SESSION['cart'])){
+                                    <?php if (isset($_SESSION['cart']) && $_SESSION['cart'] != 0){
                                         $quantityCart = 0;
                                         foreach($_SESSION['cart'] as $id=>$quantity){
                                             $quantityCart += $quantity;
                                         }
                                         echo '<span>'.$quantityCart.'</span>';
-                                        }else{
-                                            echo '';
-                                        } ?>
+                                        if ($quantityCart == 0){
+                                            unset($_SESSION['cart']);
+                                        }
+
+                                    }else{
+                                        echo '';
+                                    } 
+                                    ?>
                                     
                                 </a>
                             </div>
@@ -241,6 +250,8 @@ require_once ('../function/symbol.php');
         </div>
     </div>
     <script src="../js/my_jquery_functions.js"></script>
+    <script  src="../js/ajax.js"></script>
+    
 </body>
 
 </html>

@@ -8,7 +8,31 @@
     <hr>
     <div class="section-2 section">
         <?php
-        if (isset($_SESSION['cart'])){
+        if (isset($_SESSION['cart']) && $_SESSION['cart'] > 0){
+            if (isset($_POST['quantity'])){
+                foreach($_POST['quantity'] as $id => $quantity){
+
+                    $sqlQuantity = "select * from product where id = ".$id;
+                    $num = executeSingleResult($sqlQuantity);
+                    
+                    // echo $quantity;
+                    // echo $num['quantity'];
+                    // die();
+
+                    if ($quantity == 0){
+                        unset($_SESSION['cart'][$id]);
+                        header('location: index.php?tab=bill');
+                    }elseif(($quantity > 0) && ($quantity <= $num['quantity'])){
+                        $_SESSION['cart'][$id] = $quantity;
+                        header('location: index.php?tab=bill');
+                    }else{
+                        header('location: index.php?tab=bill');
+                    }
+                }
+            }
+
+            
+
             $arrayId = [];
             foreach($_SESSION['cart'] as $id_product => $quantity){
                 $arrayId[] = $id_product; //truyen tat ca id vao bien kieu mang
@@ -51,6 +75,8 @@
             //lay tat ca san pham trong gio hang
             $sql = "select title, id, thumbnail, sale, quantity, price from product where id in ($stringId)";
             $productList = executeResult($sql); 
+
+
         ?>
         <div class="cart-wrap">
             <div class="container">
@@ -58,73 +84,73 @@
                     <div class="col-lg-8">
                         <div class="main-heading">Giỏ hàng</div>
                         <div class="table-cart">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Sản phẩm</th>
-                                        <th>Số lượng</th>
-                                        <th>Tổng tiền</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <?php
-                                    foreach($productListOnPage as $rowOnPage){
-                                ?>
-                                    <tr>
-                                        <td>
-                                            <div class="display-flex align-center">
-                                                <div class="img-product">
-                                                    <img src="<?=$rowOnPage['thumbnail']?>" class="mCS_img_loaded">
-                                                </div>
-                                                <div class="name-product">
-                                                    <?= $rowOnPage['title']?>
-                                                </div>
-                                                <?php
-                                                    if (isset($rowOnPage['sale']) && $rowOnPage['sale'] > 0){
-                                                        $sale = $rowOnPage['sale']; //%
-                                                        $price = $rowOnPage['price'];
-                                                        $priceNew = $price * (100 - $sale)/100;
-                                                        echo "<div class='price'>".currency_format($priceNew)."/kg<br><span style='text-decoration: line-through; color: #989898;'>".currency_format($price)."/kg</span></div>";
-                                                    }else{
-                                                        echo "<div class='price'>".currency_format($rowOnPage['price'])."/kg</div>";
-                                                    }
-                                                ?>
-                                            </div>
-                                        </td>
-                                        <td class="product-count">
-                                            <form action="#" class="count-inlineflex">
-                                                <div class="qtyminus">-</div>
-                                                <input type="text" name="quantity" value="<?= $_SESSION['cart'][$rowOnPage['id']]?>" class="qty">
-                                                <div class="qtyplus">+</div>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <div class="total">
-                                                <?php
-                                                    $quantity = $_SESSION['cart'][$rowOnPage['id']];
-                                                    if (isset($rowOnPage['sale']) && $rowOnPage['sale'] > 0){
-                                                        $sale = $rowOnPage['sale']; //%
-                                                        $price = $rowOnPage['price'];
-                                                        $priceNew = $price * (100 - $sale)/100;
-                                                        echo currency_format($priceNew * $quantity);
-                                                    }else{
-                                                        echo currency_format($rowOnPage['price'] * $quantity);
-                                                    }
-                                                ?>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <a href="#" title="Xóa">
-                                                <i style="font-size: 22px; color: #989898" class="far fa-trash-alt"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                            <form method="POST" id="form_cart" name="form_cart">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Sản phẩm</th>
+                                            <th>Số lượng</th>
+                                            <th>Tổng tiền</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                     <?php
-                                    }
-                                    ?>  
-                                </tbody>
-                            </table>
+                                        foreach($productListOnPage as $rowOnPage){
+                                    ?>
+                                        <tr>
+                                            <td>
+                                                <div class="display-flex align-center">
+                                                    <div class="img-product">
+                                                        <a href="index.php?tab=product_detail&id=<?=$rowOnPage['id']?>"><img src="<?=$rowOnPage['thumbnail']?>" class="mCS_img_loaded"></a>
+                                                    </div>
+                                                    <div class="name-product">
+                                                    <a style="color:inherit" href="index.php?tab=product_detail&id=<?=$rowOnPage['id']?>"><?= $rowOnPage['title']?></a>
+                                                    </div>
+                                                    <?php
+                                                        if (isset($rowOnPage['sale']) && $rowOnPage['sale'] > 0){
+                                                            $sale = $rowOnPage['sale']; //%
+                                                            $price = $rowOnPage['price'];
+                                                            $priceNew = $price * (100 - $sale)/100;
+                                                            echo "<div class='price'>".currency_format($priceNew)."/kg<br><span style='text-decoration: line-through; color: #989898;'>".currency_format($price)."/kg</span></div>";
+                                                        }else{
+                                                            echo "<div class='price'>".currency_format($rowOnPage['price'])."/kg</div>";
+                                                        }
+                                                    ?>
+                                                </div>
+                                            </td>
+                                            <td class="product-count">
+                                                <div class="count-inlineflex">
+                                                    <div onclick="qtyMinus('<?=$rowOnPage['id']?>',<?= $_SESSION['cart'][$rowOnPage['id']]?>)" class="qtyminus">-</div>
+                                                    <input required type="number" min="0" max="<?=$rowOnPage['quantity']?>" name="quantity[<?=$rowOnPage['id']?>]" value="<?= $_SESSION['cart'][$rowOnPage['id']]?>" class="qty">
+                                                    <div onclick="qtyPlus('<?=$rowOnPage['id']?>',<?= $_SESSION['cart'][$rowOnPage['id']]?>, <?=$rowOnPage['quantity']?>)" class="qtyplus">+</div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="total">
+                                                    <?php
+                                                        $quantity = $_SESSION['cart'][$rowOnPage['id']];
+                                                        if (isset($rowOnPage['sale']) && $rowOnPage['sale'] > 0){
+                                                            $sale = $rowOnPage['sale']; //%
+                                                            $price = $rowOnPage['price'];
+                                                            $priceNew = $price * (100 - $sale)/100;
+                                                            echo currency_format($priceNew * $quantity);
+                                                        }else{
+                                                            echo currency_format($rowOnPage['price'] * $quantity);
+                                                        }
+                                                    ?>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                    <i title="Xóa" onclick="deleteProduct('<?=$rowOnPage['id']?>')" style="font-size: 22px; color: #989898; cursor:pointer" class="far fa-trash-alt"></i>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                        }
+                                        ?>  
+                                    </tbody>
+                                </table>
+                            </form>
                             <div class="navigation" style="position: inherit; display: block;" >
                                 <ul class="pagination" style="justify-content:center;">
                                     
@@ -135,9 +161,9 @@
                                 </ul>
                             </div>
                             <div class="coupon-box">
-                                <form method="POST" accept-charset="utf-8">
+                                <form method="POST">
                                     <div class="coupon-input">
-                                        <input type="text" name="coupon code" placeholder="Mã giảm giá" name="textCode">
+                                        <input type="text" placeholder="Mã giảm giá" name="textCode">
                                         <button type="submit" class="round-black-btn">Áp dụng</button>
                                     </div>
                                 </form>
@@ -163,7 +189,7 @@
                                     }
                                 }
                             ?>
-                            <form action="#" method="get" accept-charset="utf-8">
+                            <!-- <form method="GET" accept-charset="utf-8"> -->
                                 <table>
                                     <tbody>
                                         <tr>
@@ -178,39 +204,45 @@
                                             <td>Phí vận chuyển</td>
                                             <td class="free-shipping">
                                             <?php
-                                                // $arrayNameCode = [];
-                                                // foreach($listCode as $nameCode){
-                                                //     $arrayNameCode[] = $nameCode;
-                                                // }
-                                                // var_dump($listCode);
-                                                // $stringCode = implode(',', $arrayNameCode);
-                                                // var_dump($stringCode);
-                                                // die();
-                                                if (isset($_POST['textCode'])){
+                                                $checkFreeShip = 15000; //tao phi giao hang mac dinh
+                                                if (isset($_POST['textCode']) && $_POST['textCode'] != null){
                                                     $textCode = $_POST['textCode'];
-                                                    $slqCode = "select name_code from code";
-                                                    $listCode = executeResult($slqCode);
-
+                                                    $textNew = trim($textCode);
+                                                    $textResult = strtoupper($textNew);
+                                                    
+                                                    $slqCode = "select * from code where name_code = '$textResult'";
+                                                    $checkCode = executeSingleResult($slqCode);
+                                                    // var_dump($checkCode);
+                                                    // die();
+                                                    if (isset($checkCode) && $checkCode > 0){
+                                                        $checkFreeShip = 0;
+                                                    }
                                                 }
+                                                if ($checkFreeShip > 0){
+                                                    echo currency_format($checkFreeShip);
+                                                }else{
+                                                    echo "Miễn phí giao hàng.";
+                                                }
+                                                
                                             ?>
-                                            Free Shipping</td>
+                                            </td>
                                         </tr>
                                         <tr class="total-row">
                                             <td>Tổng tiền</td>
-                                            <td class="price-total">
+                                            <td class="price-total" namespace="total">
                                                 <?php
-
+                                                    echo currency_format($totalTemporary + $checkFreeShip);
                                                 ?>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                                 <div class="btn-cart-totals">
-                                    <a href="#" class="update round-black-btn" title="">Cập nhật</a>
-                                    <a href="#" class="checkout round-black-btn" title="">Tiến Hành Thanh Toán</a>
+                                    <a id="update" href="#" class="update round-black-btn" title="">Cập nhật</a>
+                                    <a onclick="payCart(<?=$checkFreeShip?>)" class="checkout round-black-btn" title="">Tiến Hành Thanh Toán</a>
                                 </div>
                                 <!-- /.btn-cart-totals -->
-                            </form>
+                            <!-- </form> -->
                             <!-- /form -->
                         </div>
                         <!-- /.cart-totals -->
@@ -220,7 +252,9 @@
             </div>
         </div>
     </div>
+    
     <?php
+            //cho nayyyyyyyyy
         }else{
             echo "<script>
                 $.alert({

@@ -22,14 +22,24 @@
       $name = $_POST['edit_name_category'];
     }
 
-    if (!empty($name)){
+    $sqldp = "select * from category where name = '$name'";
+        $checkName = executeSingleResult($sqldp);
+
+    if (isset($checkName) && $checkName > 0){
+      echo "<script>
+          $.alert({
+              title: 'Thông báo:',
+              content: 'Không thay đổi',
+          });
+      </script>";
+      }elseif (!empty($name)){
       date_default_timezone_set("Asia/Ho_Chi_Minh");
       $created_at = $updated_at = date('Y-m-d H:i:s');
       //Luu vao db
       $name = str_replace('\'', '\\\'', $name);
       $id = str_replace('\'', '\\\'', $id);
       
-      $sql = "update category set name = '$name', created_at = '$created_at', updated_at = '$updated_at' where id = '$id'";
+      $sql = "update category set name = '$name', updated_at = '$updated_at' where id = '$id'";
             
       execute($sql);
       header('Location: manage.php?tab=manage_category');
@@ -51,7 +61,7 @@
                 <div class="form-group">
                     <label for="edit_name_category" class="form-label">Tên danh mục*</label>
                     <input type="number" name="id" value="<?=$id?>" style="display: none">
-                    <input type="text" class="form-control" id ="edit_name_category" name="edit_name_category" value="<?=$name?>" />
+                    <input type="text" class="form-control" id ="edit_name_category" required name="edit_name_category" value="<?=$name?>" />
                 </div>
                 <button class="btn btn-success">Lưu lại</button>
             </form>

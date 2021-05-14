@@ -36,3 +36,41 @@ $(".close").on("click", function() {
 // $(".btnSubmit").on("click", function(e) {
 //     e.preventDefault();
 // })
+
+//xu ly onlick name update on cart
+$("#update").on("click", function() {
+    // alert("Nhấp rồi");
+    $("#form_cart").submit();
+})
+
+function viewDetail(id) {
+    var str = '#table_content' + id;
+    // alert(str);
+
+    if ($(str).css('display') == 'none') {
+        $(str).css('display', 'block');
+    } else {
+        $(str).css('display', 'none');
+    }
+}
+
+// $(document).ready(function txtSearch(id, txt) {
+//     var str = '#table_content' + id;
+//     if (txt == ' ') {
+//         $(str).css('display', 'block');
+//     } else {
+//         $(str).css('display', 'none');
+//     }
+// })
+
+function proFileBlock(id) {
+    var str = '#block-profile' + id;
+
+    $(str).css('display', 'block');
+}
+
+function proFileNone(id) {
+    var str = '#block-profile' + id;
+
+    $(str).css('display', 'none');
+}

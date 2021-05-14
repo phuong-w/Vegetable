@@ -19,6 +19,7 @@ if ($row != null){
             <div class="card">
                 <div class="container-fliud">
                     <div class="wrapper row">
+                        
                         <div class="preview col-md-6">
                         
                             <div class="preview-pic tab-content">
@@ -45,7 +46,7 @@ if ($row != null){
                             </div>
                             <!-- <p class="product-description"></p> -->
                             <div class="form-group" style="margin-top: 35px; margin-bottom: 0px">
-                                <input type="number" class="form-control" name="quantity" id="quantity" value="1" min="1" max = "<?=$row['quantity']?>" style="width: 45px;text-align: center;">
+                                <input required type="number" class="form-control" name="quantityDetail" id="quantityDetail" value="1" min="1" max = "<?=$row['quantity']?>" style="width: 45px;text-align: center;">
                             </div>
 
                             <h4 class="price-group">Giá tiền: 
@@ -74,7 +75,7 @@ if ($row != null){
                             <p style="text-align:left; font-size: 14px">Ngày cập nhật: <strong><?=$row['updated_at']?></strong></p>
 
                             <div class="action">
-                                <button class="add-to-cart btn btn-default" type="button">Thêm vào giỏ hàng</button>
+                                <button onclick="addToCartDetail('<?=$id?>', <?=$row['quantity']?>);" class="add-to-cart btn btn-default" type="button">Thêm vào giỏ hàng</button>
                                 <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
                             </div>
                         </div>

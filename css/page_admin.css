@@ -234,15 +234,63 @@ input {
     margin-top: 11px;
 }
 
-tr>td {
-    height: 150px;
-    line-height: 150px;
-}
-
 .form-block {
     width: 100%;
 }
 
 .col {
     height: 50px;
+}
+
+.table td,
+.table th {
+    padding: 5px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.block-profile {
+    display: none;
+    width: 400px;
+    position: fixed;
+    border-radius: 5px;
+    background-color: #80bb01;
+    color: #fff;
+    float: left;
+    padding: 30px 50px;
+    top: 11%;
+    left: 44%;
+    line-height: 30px;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+}
+
+.block-profile>ul>li {
+    color: #fff;
+}
+
+.block-profile>ul>li>i {
+    display: inline-block;
+    width: 50%;
+    color: #fff;
+}
+
+.bill>ul {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bill>ul>li {
+    color: #ff9f1a;
+    font-weight: bold;
+}
+
+.bill>ul>li>i {
+    color: #fff;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
