@@ -81,7 +81,7 @@ require_once ('../function/symbol.php');
                                     <span id="username" style="font-size: 18px; padding: 0 5px">'.$_SESSION['fullname'].'</span>
                                     <i class="fas fa-caret-down" style="font-size: 18px;"></i>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">Thông tin</a></li>
+                                        <li><a href="index.php?tab=profile">Thông tin</a></li>
                                         <li><a href="index.php?tab=shipping_bill">Đơn hàng</a></li>
                                         <li><a href="../function/logout.php">Đăng xuất</a></li>
                                     </ul>
@@ -147,7 +147,7 @@ require_once ('../function/symbol.php');
                             <li class="product"><a href="index.php">Gian hàng</a></li>
                             <li><a href="#">Sự khác biệt</a></li>
                             <li><a href="#">Tin tức</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="index.php?tab=contact">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -171,6 +171,9 @@ require_once ('../function/symbol.php');
                 break;
               case 'shipping_bill':
                 include_once './shipping_bill/index.php';
+                break;
+              case 'profile':
+                include_once './profile/index.php';
                 break;
               default:
                 include_once './product/index.php';

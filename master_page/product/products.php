@@ -22,9 +22,9 @@
         $textNew = implode('%', $arrayText); //chen ky tu vao tung phan tu cua mang, tra lai chuoi string
         $textNew = '%'.$textNew.'%'; //bo xung ky tu vao dau va cuoi
 
-        $sql2 = "select product.id from product where product.stop_buy = 0 and title like ('$textNew')";
+        $sql2 = "select product.id from product where product.stop_buy = 0 and title like ('$textNew') and quantity > 0";
     }else{
-        $sql2 = "select product.id from product where product.stop_buy = 0";
+        $sql2 = "select product.id from product where product.stop_buy = 0 and quantity > 0";
     }
 
     $rowPerPage = 8;
@@ -47,15 +47,15 @@
     $id_category = $_GET['id'];
 
     $sql = "select product.id, product.title, product.thumbnail, product.price, product.sale, product.updated_at 
-    from product where product.stop_buy = 0 and product.id_category = '$id_category' order by product.id desc limit $perRow, $rowPerPage";
+    from product where product.stop_buy = 0 and product.quantity > 0 and product.id_category = '$id_category' order by product.id desc limit $perRow, $rowPerPage";
     $productList = executeResult($sql);
   }else{
       if (isset($_POST['textSearch']) && $_POST['textSearch'] != null){
         $sql = "select product.id, product.title, product.thumbnail, product.price, product.sale, product.updated_at 
-        from product where product.stop_buy = 0 and product.title like ('$textNew') order by product.id desc limit $perRow, $rowPerPage";
+        from product where product.stop_buy = 0 and product.quantity > 0 and product.title like ('$textNew') order by product.id desc limit $perRow, $rowPerPage";
       }else{
         $sql = "select product.id, product.title, product.thumbnail, product.price, product.sale, product.updated_at 
-        from product where product.stop_buy = 0 order by product.id desc limit $perRow, $rowPerPage";
+        from product where product.stop_buy = 0 and product.quantity > 0 order by product.id desc limit $perRow, $rowPerPage";
       }
         $productList = executeResult($sql);
   }

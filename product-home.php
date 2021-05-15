@@ -7,11 +7,11 @@
     $id_category = $_GET['id'];
 
     $sql = "select product.id, product.title, product.thumbnail, product.price, product.sale, product.updated_at 
-    from product where product.id_category = '$id_category' and product.stop_buy = 0 order by rand() limit 8";
+    from product where product.id_category = '$id_category' and product.stop_buy = 0 and product.quantity > 0 order by rand() limit 8";
     $productList = executeResult($sql);
   }else{
     $sql = "select product.id, product.title, product.thumbnail, product.price, product.sale, product.updated_at 
-            from product where product.stop_buy = 0 order by rand() limit 8";
+            from product where product.stop_buy = 0 and product.quantity > 0 order by rand() limit 8";
     $productList = executeResult($sql);
   }
 

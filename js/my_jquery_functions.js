@@ -74,3 +74,28 @@ function proFileNone(id) {
 
     $(str).css('display', 'none');
 }
+
+//profile
+function updatePassword() {
+    $('#detail').css('display', 'none');
+    $('#up-password').css('display', 'block');
+}
+
+function updateDetail() {
+    $('#detail').css('display', 'none');
+    $('#up-detail').css('display', 'block');
+}
+
+function packToDetail() {
+    $('#detail').css('display', 'block');
+    $('#up-password').css('display', 'none');
+    $('#up-detail').css('display', 'none');
+}
+
+function submitForm() {
+    if ($('#up-password').css('display') == 'block') {
+        $('#form-password').submit();
+    } else {
+        $('#form-detail').submit();
+    }
+}

@@ -79,7 +79,7 @@ require_once ('./db/function.php');
                                     <span id="username" style="font-size: 18px; padding: 0 5px">'.$_SESSION['fullname'].'</span>
                                     <i class="fas fa-caret-down" style="font-size: 18px;"></i>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="#">Thông tin</a></li>
+                                        <li><a href="./master_page/index.php?tab=profile">Thông tin</a></li>
                                         <li><a href="./master_page/index.php?tab=shipping_bill">Đơn hàng</a></li>
                                         <li><a href="./function/logout.php">Đăng xuất</a></li>
                                     </ul>

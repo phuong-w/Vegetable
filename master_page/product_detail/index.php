@@ -9,7 +9,7 @@ $row = executeSingleResult($sql);
 if ($row != null){
 ?>
 
-<link rel="stylesheet" href="../css/product_detail.css">
+<link rel="stylesheet" href="../css/contact.css">
 
 <!-- Content -->
 <div id="content">
@@ -42,7 +42,17 @@ if ($row != null){
                                     <span class="fa fa-star checked"></span>
                                     <span class="fa fa-star"></span>
                                 </div>
-                                <span class="review-no">41 reviews</span>
+                                <?php
+                                $fp = './product_detail/count.txt';
+                                $fo = fopen($fp, 'r');
+                                $count = fread($fo, filesize($fp));
+                                $count++;
+                                $fc = fclose($fo);
+                                $fo = fopen($fp, 'w');
+                                $fw = fwrite($fo, $count);
+                                $fc = fclose($fo);
+                                ?>
+                                <span class="review-no"><?= $count?> reviews</span>
                             </div>
                             <!-- <p class="product-description"></p> -->
                             <div class="form-group" style="margin-top: 35px; margin-bottom: 0px">

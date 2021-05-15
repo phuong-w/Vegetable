@@ -71,7 +71,7 @@ if (isset($_SESSION['username'])){
     <div class="section-2 section">
     <div class="main" style="width: 68%;margin: auto;">
         <div style="display: block;">
-            <h4 style="width: 40%;float: left; font-size: 22px; line-height: 5px;">KIỂM TRA ĐƠN HÀNG</h4>
+            <h4 style="width: 40%;float: left; font-size: 22px; line-height: 5px;">ĐƠN HÀNG ĐÃ MUA</h4>
             <div class="div-input_search" style="margin-top: 40px; width: 100%">
                 <form method="POST">
                     <div class="form-group" style="height: 50px;">
@@ -137,7 +137,7 @@ if (isset($_SESSION['username'])){
             <li><i>Thanh toán: </i><?=currency_format($bill['totals'])?></li>
             </ul>
             <div style="padding-top: 7px; height: 36px;">
-            <button onclick="viewDetail(<?=$bill['id']?>)" style="float: right; border: none;background: darkgray;  margin-right: 37%;" class ="btn btn-danger">Xem chi tiết</button>
+            <button onclick="viewDetail(<?=$bill['id']?>)" style="float: left; border: none;background: darkgray;  margin-right: 14%;" class ="btn btn-danger">Xem chi tiết</button>
             <ul style=" float: left; padding: 5px 20px; background: #fff; margin-top: 1px; border-radius: 5px; margin-right: 50px;">
 
             <?php
